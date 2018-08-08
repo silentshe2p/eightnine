@@ -1,0 +1,80 @@
+#puzzle {
+	width: 100%;
+	margin: 0;
+	padding: 10px;
+	border: 1px solid black;
+}
+
+.square {
+	width: 50px;
+	height: 50px;
+	margin: 0;
+	padding: 0;
+	border-collapse: collapse;
+    position: relative;
+}
+
+.empty {
+    background-color:white;
+}
+
+.letter {
+    border: 1px solid black;
+    text-align: center;
+    cursor: pointer;
+    font-size: 30px;
+    padding: 14px 10px;
+    border-color: rgb(160, 153, 153);
+}
+
+#puzzle-container {
+	float: left;
+	width: 50%;
+	height: 50%;
+}
+
+#hints-container {
+	float: left;
+	width: 50%;
+    height: 50%;
+    padding-top: 60px;
+    margin-left: 30px;
+}
+
+#buttons-container {
+    clear: both;
+    padding-top: 50px;
+    margin-left: 40px;
+}
+
+.active {
+    border-color: rgb(255, 0, 0);
+}
+
+.positive {
+    background-color:rgb(123, 196, 156);
+}
+
+.negative {
+    background-color:rgb(212, 143, 143);
+}
+
+.qnum {
+    position: absolute;
+    font-size: 12px;
+    color: grey;
+    left: 2px;
+    top: 2px;
+}
+
+.qnum-alt {
+    position: absolute;
+    font-size: 12px;
+    color: grey;
+    right: 2px;
+    top: 2px;
+}
+
+td {
+    position:relative;
+}

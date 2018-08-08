@@ -1,0 +1,70 @@
+[
+	{
+		"qid": 1,
+        "hint": "名前が2母音で始まるヘビのような動物?",
+        "ans": "eel",
+        "dir": "ver",
+        "start": 0,
+        "req": "none"
+    },
+	{
+		"qid": 2,
+        "hint": "この曲の名前は何でしょうか？",
+        "ans": "firstlove",
+        "dir": "hor",
+        "start": 0,
+        "req": "mus",
+        "path": "../sounds/fl.mp3"
+    },
+	{
+		"qid": 3,
+        "hint": "バブルティーは英語で何と呼ばれていますか？",
+        "ans": "boba",
+        "dir": "ver",
+        "start": 1,
+        "req": "none"
+    },
+	{
+		"qid": 4,
+        "hint": "このオーディオクリップで誰が歌いますか？",
+        "ans": "edsheeran",
+        "dir": "ver",
+        "start": 2,
+        "req": "mus",
+        "path": "../sounds/at.mp3"
+    },
+	{
+		"qid": 5,
+        "hint": "このオーディオクリップで誰が歌いますか？",
+        "ans": "abemao",
+        "dir": "hor",
+        "start": 6,
+        "req": "mus",
+        "path": "../sounds/am.mp3"
+    },
+	{
+		"qid": 6,
+        "hint": "ドラマ「恋仲」でエンディング曲を歌う人? (知らないと言ったらゆるさんぞ!!)",
+        "ans": "leoieiri",
+        "dir": "hor",
+        "start": 7,
+        "req": "none"
+    },
+	{
+		"qid": 7,
+        "hint": "日本(japan)のポップミュージック(pop)はjpopと呼ばれ、中国(chinese)のラップ(rap)は何を呼び出すべきですか？",
+        "ans": "crap",
+        "dir": "hor",
+        "start": 6,
+        "req": "none"
+    },
+	{
+		"qid": 8,
+        "hint": "写真の中の都市は何ですか？",
+        "ans": "nakano",
+        "dir": "ver",
+        "start": 1,
+        "req": "img",
+        "path": "../images/nk"
+    }
+]
