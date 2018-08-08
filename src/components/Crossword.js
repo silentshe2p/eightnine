@@ -131,17 +131,17 @@ class Crossword extends Component {
     // Any unfilled/wrong cell -> GAMEOVER
     onDone() {
         let completed = true;
-        // $(".letter").each(function() {
-        //     let filled = $(this).text();
-        //     if (!filled) {
-        //         completed = false;
-        //     }
-        //     else {
-        //         let loc = $(this).data("grid-index");
-        //         if (filled !== getCorrectLetter(loc, cwdata))
-        //         completed = false;
-        //     }
-        // })
+        $(".letter").each(function() {
+            let filled = $(this).text();
+            if (!filled) {
+                completed = false;
+            }
+            else {
+                let loc = $(this).data("grid-index");
+                if (filled !== getCorrectLetter(loc, cwdata))
+                completed = false;
+            }
+        })
         this.setState({ status: (completed) ? "completed" : "gameover" });
         this.handleShow();
     }
