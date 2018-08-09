@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Header } from 'semantic-ui-react';
+import { Card, Header, Modal, Image } from 'semantic-ui-react';
 import ReactAudioPlayer from 'react-audio-player';
 
 // Hardcoded images since it isn't possible to using variable path inside require
@@ -44,6 +44,12 @@ export const MusicHint = ({ hint, path }) => {
     </div>;
 }
 
+const imageModal = (src) => {
+    return <Modal trigger={ <Card raised image={ src } /> } closeIcon>
+        <Image centered={true} size='big' src={ src } />
+    </Modal>;
+}
+
 // Hint for questions that needs to display images
 export const PictureHint = ({ hint }) => {
     return <div>
@@ -51,12 +57,12 @@ export const PictureHint = ({ hint }) => {
             { hint }
         </Header>
         <Card.Group itemsPerRow={3}>
-            <Card raised image={ P1 } />
-            <Card raised image={ P2 } />
-            <Card raised image={ P3 } />
-            <Card raised image={ P4 } />
-            <Card raised image={ P5 } />
-            <Card raised image={ P6 } />
+            { imageModal(P1) }
+            { imageModal(P2) }
+            { imageModal(P3) }
+            { imageModal(P4) }
+            { imageModal(P5) }
+            { imageModal(P6) }
         </Card.Group>
     </div>;
 }

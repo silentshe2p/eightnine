@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Comment, Divider, Icon, Message, Transition, Segment } from 'semantic-ui-react';
+import { Container, Comment, Divider, Icon, Message, Segment } from 'semantic-ui-react';
 
 import mainAvatar from '../images/myr-avatar.png';
 import bossAvatar from '../images/bos-avatar.png';
@@ -12,7 +12,6 @@ class DisplayText extends Component {
             sectionIdx: 0,
             contentIdx: 0
         }
-        this.transitionTimer = null;
         this.text = props.toPlay;
         this.lastIdx = this.text.length - 1;
         this.transition = this.transition.bind(this);
@@ -25,18 +24,13 @@ class DisplayText extends Component {
 
     componentWillUnmount() {
         window.removeEventListener('click', this.transition);
-        clearInterval(this.transitionTimer);
     }
 
     transition() {
         // At the last section -> transite to the next part
         if (this.state.sectionIdx >= this.lastIdx && 
             this.state.contentIdx >= this.text[this.state.sectionIdx].content.length - 1) {
-            this.toggleVisibility();
-            // Set next part after transition of this part is done
-            this.transitionTimer = setInterval(() => {
-                this.props.setNextPart(this.props.nextPart);
-            }, 300);
+            this.props.setNextPart(this.props.nextPart);
         }
 
         // At the end of current content -> move on to the next section
@@ -111,9 +105,7 @@ class DisplayText extends Component {
     toggleVisibility = () => this.setState({ visible: !this.state.visible });
 
     render() {
-        return <Transition visible={ this.state.visible } animation='slide right' duration={300}>
-            { this.renderText(this.text[this.state.sectionIdx]) }
-        </Transition>
+        return this.renderText(this.text[this.state.sectionIdx]);
     }
 }
 

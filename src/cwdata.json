@@ -52,7 +52,7 @@
     },
 	{
 		"qid": 7,
-        "hint": "日本(japan)のポップミュージック(pop)はjpopと呼ばれ、中国(chinese)のラップ(rap)は何を呼び出すべきですか？",
+        "hint": "日本(japan)のポップミュージック(pop)はjpopと呼ばれ、中国(china)のラップ(rap)は何を呼び出すべきですか？",
         "ans": "crap",
         "dir": "hor",
         "start": 6,

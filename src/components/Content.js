@@ -25,7 +25,6 @@ class Content extends Component {
     }
 
     render() {
-        console.log(this.state.showing);
         return <div>
             <Menu stackable>
                 <Menu.Item>
