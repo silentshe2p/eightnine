@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Card, Header, Modal, Image } from 'semantic-ui-react';
 import ReactAudioPlayer from 'react-audio-player';
 
