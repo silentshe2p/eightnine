@@ -51,12 +51,14 @@ class Crossword extends Component {
             status: "playing",
             clueCount: 6,
             checkCount: 2,
+            activeTab: 15,
             msg: "クロスワードが解決された後"
         };
         // this.transitionTimer = this.transitionTimer;
         this.onDone = this.onDone.bind(this);
         this.onCheck = this.onCheck.bind(this);
         this.onClue = this.onClue.bind(this);
+        this.onTabChange = this.onTabChange.bind(this);
     }
 
     isCompleted() {
@@ -148,6 +150,7 @@ class Crossword extends Component {
     onDone() {
         let completed = true;
         $(".letter").each(function() {
+            $(this).removeClass("selected").removeClass("positive").removeClass("negative");
             let filled = $(this).text();
             if (!filled) {
                 completed = false;
@@ -158,26 +161,31 @@ class Crossword extends Component {
                 completed = false;
             }
         })
-        this.setState({ status: completed ? "completed" : "gameover" });
-        this.handleShow();
+        this.setState({
+            active: true,
+            status: completed ? "completed" : "gameover"
+        });
     }
 
     onTabChange(_, data) {
         $(".letter").removeClass("selected");
+        this.setState({
+            activeTab: data.activeIndex
+        });
         const qid = (data.activeIndex + 1);
-        $(".letter").each(function(idx, cell) {
-            const data = $(cell).data("qid");
+        $(".letter").each(function() {
+            const data = $(this).data("qid");
             const [row, col] = data.toString().split('.');
             if (+row === qid || +col === qid) {
-                $(cell).addClass("selected");
+                $(this).addClass("selected");
             }
         });
     }
 
     onSolve() {
-        $(".letter").each(function(idx, cell) {
-            const loc = $(cell).data("grid-index");
-            $(cell).text(getCorrectLetter(loc, cwdata))
+        $(".letter").each(function() {
+            const loc = $(this).data("grid-index");
+            $(this).text(getCorrectLetter(loc, cwdata))
         });
     }
 
@@ -189,10 +197,6 @@ class Crossword extends Component {
     //     clearInterval(this.transitionTimer);
     // }
 
-    handleShow = () => this.setState({ active: true })
-
-    handleHide = () => this.setState({ active: false })
-
     // Set interval before moving to the next part to prevent on mouse click events between both
     // handleAdvance = () => {
     //     this.transitionTimer = setInterval(() => {
@@ -203,22 +207,30 @@ class Crossword extends Component {
     handleHighlight = () => {
         this.setState({ 
             active: false,
-            msg: (<Menu.Item key='message'>まつりへ <Label>1</Label></Menu.Item>)
+            msg: (<Menu.Item key='message'>まつりへ <Label>1</Label></Menu.Item>),
+            activeTab: 15
         })
         const [startRow, startCol] = messageStartLocation;
-        $(".letter").each(function(idx, cell) { 
-            $(cell).attr("contenteditable", false);
-            const data = $(cell).data("grid-index");
+        $(".letter").each(function() {
+            $(this).attr("contenteditable", false);
+            const data = $(this).data("grid-index");
             const [row, col] = data.toString().split('.');
             if (+row >= startRow && +col >= startCol && ((+row - startRow) === (+col - startCol))) {
-                $(cell).addClass("rainbow");
+                $(this).addClass("rainbow");
             }
         });
     }
 
     handleRetry = () => {
         this.onClear();
-        this.handleHide();
+        this.setState({
+            active: false,
+            status: "playing",
+            clueCount: 3,
+            checkCount: 1,
+            activeTab: 15,
+            msg: "クロスワードが解決された後"
+        });
     }
 
     renderHint(hintObj) {
@@ -250,7 +262,7 @@ class Crossword extends Component {
             
             <div id="buttons-container">
                 <Popup 
-                    trigger={ <Button secondary id="clue" 
+                    trigger={ <Button secondary id="clue"
                                     onClick={ this.onClue } 
                                     disabled={ ((this.state.clueCount === 0) || this.isCompleted()) ? true : false }>Clue</Button> }
                     content={`Reveal the correct character at the selected cell (left: ${this.state.clueCount} usage)`} />
@@ -272,8 +284,8 @@ class Crossword extends Component {
                     <Header.Content>Hints</Header.Content>
                 </Header>
                 <Tab menu={{ secondary: true, pointing: true }} panes={panes}
-                    defaultActiveIndex="15"
                     onTabChange={ this.onTabChange }
+                    activeIndex={ this.state.activeTab }
                 />
                 <Divider hidden />
                 <Divider hidden />
