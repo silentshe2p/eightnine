@@ -23,8 +23,7 @@ class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            firstName: "",
-            lastName: "",
+            name: "",
             redirectToRef: store.get('loggedIn'),
             incorrect: false
         };
@@ -33,19 +32,18 @@ class Login extends Component {
     }
 
     onChange(e) {
+        console.log(e.currentTarget);
         this.setState({ [e.currentTarget.name]: e.currentTarget.value });
     }
 
     login() {
-        if (this.state.firstName.toLowerCase() === recipient.firstName && 
-            this.state.lastName.toLowerCase() === recipient.lastName) {
+        if (this.state.name.toLowerCase() === recipient.name) {
             this.props.handleSetLogin();
             this.setState({ redirectToRef: true });
         }
         else {
             this.setState({
-                firstName: "",
-                lastName: "",
+                name: "",
                 incorrect: true
             })
         }
@@ -63,10 +61,8 @@ class Login extends Component {
             <Header as='h2'>Login</Header>
             { (this.state.incorrect) ? <ErrorMsg /> : <IntroMsg /> }
             <Form>
-                <Form.Input label="First name" name="firstName"
-                    value={ this.state.firstName } onChange={ this.onChange } />
-                <Form.Input label="Last name" name="lastName"
-                    value={ this.state.lastName } onChange={ this.onChange } />
+                <Form.Input label="Name" name="name"
+                    value={ this.state.name } onChange={ this.onChange } />
                 <Button onClick={ this.login }>I am!!!</Button>
             </Form>
         </Container>

@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
 import { Menu, Icon } from 'semantic-ui-react';
 
-import { Card } from './Card';
+// import { Card } from './Card';
 import Crossword from './Crossword';
 import DisplayText from './DisplayText';
 
 import intro from '../intro.json';
-import outro from '../outro.json';
-import avatar from '../images/act-avatar.png';
-
-const cardUrl = "https://drive.google.com/file/d/1EOKqj_uIlbfwrXiYHLTRCbJiG-ieb1R1/preview";
+// import outro from '../outro.json';
+import avatar from '../images/act-avatar.jpg';
 
 class Content extends Component {
     constructor(props) {
@@ -28,7 +26,7 @@ class Content extends Component {
         return <div>
             <Menu stackable>
                 <Menu.Item>
-                    <img src={ avatar } alt="unagi"/>                    
+                    <img src={ avatar } alt="pokemon"/>                    
                 </Menu.Item>
                 <Menu.Item>
                     <Icon name='caret right' />
@@ -43,14 +41,15 @@ class Content extends Component {
                 <DisplayText nextPart="crossword" 
                     setNextPart={ this.setNextPart } 
                     toPlay={intro} /> }
-            { (this.state.showing === "crossword") 
+            { (this.state.showing === "crossword") && <Crossword /> }
+            {/* { (this.state.showing === "crossword") 
                 && <Crossword nextPart="outro" 
-                    setNextPart={ this.setNextPart } /> }
-            { (this.state.showing === "outro") 
+                    setNextPart={ this.setNextPart } /> } */}
+            {/* { (this.state.showing === "outro") 
                 && <DisplayText nextPart="card" 
                     setNextPart={ this.setNextPart } 
                     toPlay={outro} /> }
-            { (this.state.showing === "card") && <Card url={ cardUrl } /> }
+            { (this.state.showing === "card") && <Card url={ cardUrl } /> } */}
         </div>;
     }
 }

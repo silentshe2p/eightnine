@@ -1,3 +1,1 @@
-## A silly birthday present
-
-Happy birthday MS!
+## Happy birthday M

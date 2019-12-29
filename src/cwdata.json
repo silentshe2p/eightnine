@@ -1,70 +1,138 @@
 [
 	{
 		"qid": 1,
-        "hint": "名前が2母音で始まるヘビのような動物?",
-        "ans": "eel",
+        "hint": "この曲の名前は何でしょうか？",
+        "ans": "blankspace",
         "dir": "ver",
         "start": 0,
-        "req": "none"
+        "req": "sound",
+        "path": "../sounds/bspace.mp3"
     },
 	{
 		"qid": 2,
-        "hint": "この曲の名前は何でしょうか？",
-        "ans": "firstlove",
+        "hint": "BUMP OF CHICKENの2017-2018ツアーの名前は？",
+        "ans": "pathfinder",
         "dir": "hor",
-        "start": 0,
-        "req": "mus",
-        "path": "../sounds/fl.mp3"
+        "start": 1,
+        "req": "none"
     },
 	{
 		"qid": 3,
-        "hint": "バブルティーは英語で何と呼ばれていますか？",
-        "ans": "boba",
-        "dir": "ver",
-        "start": 1,
-        "req": "none"
+        "hint": "この曲の名前は何でしょうか？ (Hint: 君の名は)",
+        "ans": "sparkle",
+        "dir": "hor",
+        "start": 3,
+        "req": "sound",
+        "path": "../sounds/sparkle.mp3"
     },
 	{
 		"qid": 4,
-        "hint": "このオーディオクリップで誰が歌いますか？",
-        "ans": "edsheeran",
-        "dir": "ver",
-        "start": 2,
-        "req": "mus",
-        "path": "../sounds/at.mp3"
+        "hint": "「天気の子」映画の曲を作るバンドは？",
+        "ans": "radwimps",
+        "dir": "hor",
+        "start": 0,
+        "req": "none"
     },
 	{
 		"qid": 5,
-        "hint": "このオーディオクリップで誰が歌いますか？",
-        "ans": "abemao",
+        "hint": "2020年に東京で起こる大きなイベントは？",
+        "ans": "olympics",
         "dir": "hor",
-        "start": 6,
-        "req": "mus",
-        "path": "../sounds/am.mp3"
+        "start": 3,
+        "req": "none"
     },
 	{
 		"qid": 6,
-        "hint": "ドラマ「恋仲」でエンディング曲を歌う人? (知らないと言ったらゆるさんぞ!!)",
-        "ans": "leoieiri",
+        "hint": "この曲の名前は何でしょうか？ (Hint: lego big morl)",
+        "ans": "ray",
         "dir": "hor",
-        "start": 7,
-        "req": "none"
+        "start": 6,
+        "req": "sound",
+        "path": "../sounds/ray.mp3"
     },
 	{
 		"qid": 7,
-        "hint": "日本(japan)のポップミュージック(pop)はjpopと呼ばれ、中国(china)のラップ(rap)は何を呼び出すべきですか？",
-        "ans": "crap",
-        "dir": "hor",
+        "hint": "これは誰の画像ですか？",
+        "ans": "shuichiakai",
+        "dir": "ver",
         "start": 6,
-        "req": "none"
+        "req": "image",
+        "path": "../images/shuichi-4"
     },
 	{
 		"qid": 8,
-        "hint": "写真の中の都市は何ですか？",
-        "ans": "nakano",
+        "hint": "この曲を歌っているのは誰ですか？",
+        "ans": "bumpofchicken",
+        "dir": "hor",
+        "start": 9,
+        "req": "sound",
+        "path": "../sounds/uta.mp3"
+    },
+    {
+		"qid": 9,
+        "hint": "この曲の名前は何でしょうか？",
+        "ans": "marigold",
         "dir": "ver",
-        "start": 1,
-        "req": "img",
-        "path": "../images/nk"
+        "start": 8,
+        "req": "sound",
+        "path": "../sounds/marigold.mp3"
+    },
+    {
+		"qid": 10,
+        "hint": "日本で利用されている伝統的な床材は?",
+        "ans": "tatami",
+        "dir": "ver",
+        "start": 11,
+        "req": "none"
+    },
+    {
+		"qid": 11,
+        "hint": "このダンスフェスティバルは1954年にどこで開催されましたか？",
+        "ans": "kochi",
+        "dir": "ver",
+        "start": 9,
+        "req": "image",
+        "path": "../images/yosakoi-5"
+    },
+    {
+		"qid": 12,
+        "hint": "この曲の名前は何でしょうか？",
+        "ans": "candycandy",
+        "dir": "ver",
+        "start": 10,
+        "req": "sound",
+        "path": "../sounds/candy.mp3"
+    },
+    {
+		"qid": 13,
+        "hint": "この女優の苗字は何ですか？",
+        "ans": "aragaki",
+        "dir": "ver",
+        "start": 12,
+        "req": "image",
+        "path": "../images/aragaki-5"
+    },
+    {
+		"qid": 14,
+        "hint": "升秀夫さんはどの楽器を演奏しますか？",
+        "ans": "drum",
+        "dir": "hor",
+        "start": 14,
+        "req": "none"
+    },
+    {
+		"qid": 15,
+        "hint": "このハンサムな男の仕事は何ですか？",
+        "ans": "gymnast",
+        "dir": "hor",
+        "start": 15,
+        "req": "image",
+        "path": "../images/kohei-5"
+    },
+    {
+		"qid": 16,
+        "hint": "クロスワードを解いてくれてありがとう🧩。まつりとってそれほど難しくないだろね (赤井秀一の質問はちょっとかも知れない、はは)🤣。クロスワードを楽しんだなら、これを作る価値があったよ。まだ会っていませんが、私の友達になってくれてありがとう🙏。誕生日おめでとう🥳、ついでに明けおめ🐁!",
+        "req": "completed",
+        "path": "../sounds/candy-full.mp3"
     }
 ]

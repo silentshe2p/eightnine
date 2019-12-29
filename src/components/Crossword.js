@@ -1,25 +1,38 @@
 import React, { Component } from 'react';
-import { Button, Dimmer, Header, Icon, Tab, Popup, Segment, Divider } from 'semantic-ui-react';
+import { 
+    Button, Dimmer, Header, Icon, Tab, Popup, Segment, Divider, Label, Menu
+} from 'semantic-ui-react';
 import $ from 'jquery';
 
-import { NormalHint, MusicHint, PictureHint } from './Hints';
+import { TextHint, SoundHint, PictureHint } from './Hints';
 import '../css/Crossword.css';
 import cwdata from '../cwdata.json';
 
 // Layout of the crossword, non-zero numbers represent input cells
 const grid = [
-    [0  , 0  , 0  , 0  , 0  , 1  , 0  , 0  , 0  , 0  , 0  , 0  , 0  , 0  , 0],
-    [0  , 0  , 0  , 0  , 0  , 1  , 3  , 0  , 0  , 0  , 0  , 8  , 0  , 0  , 0],
-    [2  , 2  , 2  , 2  , 2  , 1.2, 2.3, 2  , 2.4, 0  , 0  , 8  , 0  , 0  , 0],
-    [0  , 0  , 0  , 0  , 0  , 0  , 3  , 0  , 4  , 0  , 0  , 8  , 0  , 0  , 0],
-    [0  , 0  , 0  , 0  , 0  , 0  , 3  , 0  , 4  , 0  , 0  , 8  , 0  , 0  , 0],
-    [0  , 0  , 0  , 0  , 0  , 0  , 0  , 0  , 4  , 0  , 0  , 8  , 0  , 0  , 0],
-    [0  , 0  , 0  , 0  , 0  , 0  , 5  , 5  , 4.5, 5  , 5  , 5.8, 0  , 0  , 0],
-    [0  , 0  , 0  , 0  , 0  , 0  , 0  , 6  , 4.6, 6  , 6  , 6  , 6  , 6  , 6],
-    [0  , 0  , 0  , 0  , 0  , 0  , 0  , 0  , 4  , 0  , 0  , 0  , 0  , 0  , 0],
-    [0  , 0  , 0  , 0  , 0  , 0  , 7  , 7  , 4.7, 7  , 0  , 0  , 0  , 0  , 0],
-    [0  , 0  , 0  , 0  , 0  , 0  , 0  , 0  , 4  , 0  , 0  , 0  , 0  , 0  , 0],
+    [0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  1   ,  0 ,  0 ,  0   ,  0   ,  0  ,  0  ,  0     ,  0     ,  0  ,  0  ,  0  ,  0  ,  0  ,  0 ],
+    [0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  1   ,  0 ,  0 ,  0   ,  0   ,  0  ,  0  ,  0     ,  0     ,  0  ,  0  ,  0  ,  0  ,  0  ,  0 ],
+    [0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  1   ,  0 ,  0 ,  0   ,  0   ,  0  ,  0  ,  0     ,  0     ,  0  ,  0  ,  0  ,  0  ,  0  ,  0 ],
+    [0 ,  2 ,  2 ,  2 ,  2 ,  2 ,  2 ,  1.2 ,  2 ,  2 ,  2   ,  0   ,  0  ,  0  ,  0     ,  0     ,  0  ,  0  ,  0  ,  0  ,  0  ,  0 ],
+    [0 ,  0 ,  0 ,  3 ,  3 ,  3 ,  3 ,  1.3 ,  3 ,  3 ,  0   ,  0   ,  0  ,  0  ,  0     ,  0     ,  0  ,  0  ,  0  ,  0  ,  0  ,  0 ],
+    [4 ,  4 ,  4 ,  4 ,  4 ,  4 ,  4 ,  1.4 ,  0 ,  0 ,  0   ,  0   ,  0  ,  0  ,  0     ,  0     ,  0  ,  0  ,  0  ,  0  ,  0  ,  0 ],
+    [0 ,  0 ,  0 ,  5 ,  5 ,  5 ,  5 ,  1.5 ,  5 ,  5 ,  5.7 ,  0   ,  0  ,  0  ,  0     ,  0     ,  0  ,  0  ,  0  ,  0  ,  0  ,  0 ],
+    [0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  6 ,  1.6 ,  6 ,  0 ,  7   ,  0   ,  0  ,  0  ,  0     ,  0     ,  0  ,  0  ,  0  ,  0  ,  0  ,  0 ],
+    [0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  1   ,  0 ,  8 ,  7.8 ,  8.9 ,  8  ,  8  ,  8     ,  8     ,  8  ,  8  ,  8  ,  8  ,  8  ,  8 ],
+    [0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  1   ,  0 ,  0 ,  7   ,  9   ,  0  ,  11  ,  0     ,  0     ,  0  ,  0  ,  0  ,  0  ,  0  ,  0 ],
+    [0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0   ,  0 ,  0 ,  7   ,  9   ,  0  ,  11 ,  12    ,  0     ,  0  ,  0  ,  0  ,  0  ,  0  ,  0 ],
+    [0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0   ,  0 ,  0 ,  7   ,  9   ,  10 ,  11 ,  12    ,  0     ,  0  ,  0  ,  0  ,  0  ,  0  ,  0 ],
+    [0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0   ,  0 ,  0 ,  7   ,  9   ,  10 ,  11 ,  12    ,  13    ,  0  ,  0  ,  0  ,  0  ,  0  ,  0 ],
+    [0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0   ,  0 ,  0 ,  7   ,  9   ,  10 ,  11 ,  12.14 ,  13.14 ,  14 ,  14 ,  0  ,  0  ,  0  ,  0 ],
+    [0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0   ,  0 ,  0 ,  7   ,  9   ,  10 ,  0 ,  12    ,  13    ,  0  ,  0  ,  0  ,  0  ,  0  ,  0 ],
+    [0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0   ,  0 ,  0 ,  7   ,  9   ,  10 ,  0  ,  12    ,  13.15 ,  15 ,  15 ,  15 ,  15 ,  15 ,  15],
+    [0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0   ,  0 ,  0 ,  7   ,  0   ,  10 ,  0  ,  12    ,  13    ,  0  ,  0  ,  0  ,  0  ,  0  ,  0 ],
+    [0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0   ,  0 ,  0 ,  0   ,  0   ,  0  ,  0  ,  12    ,  13    ,  0  ,  0  ,  0  ,  0  ,  0  ,  0 ],
+    [0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0   ,  0 ,  0 ,  0   ,  0   ,  0  ,  0  ,  12    ,  13    ,  0  ,  0  ,  0  ,  0  ,  0  ,  0 ],
+    [0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0   ,  0 ,  0 ,  0   ,  0   ,  0  ,  0  ,  12    ,  0     ,  0  ,  0  ,  0  ,  0  ,  0  ,  0 ],
 ];
+
+const messageStartLocation = [3, 4];
 
 // Check correct answers to find the correct letter at current selected cell
 const getCorrectLetter = (location, data) => {
@@ -36,13 +49,18 @@ class Crossword extends Component {
         this.state = {
             active: false,
             status: "playing",
-            clueCount: 3,
-            checkCount: 1
+            clueCount: 6,
+            checkCount: 2,
+            msg: "クロスワードが解決された後"
         };
-        this.transitionTimer = this.transitionTimer;
+        // this.transitionTimer = this.transitionTimer;
         this.onDone = this.onDone.bind(this);
         this.onCheck = this.onCheck.bind(this);
         this.onClue = this.onClue.bind(this);
+    }
+
+    isCompleted() {
+        return this.state.status === "completed";
     }
 
     drawCrossword() {
@@ -59,8 +77,9 @@ class Crossword extends Component {
                 else if (qid % 1 === 0)
                     $(tr).append('<td><span class="qnum">' 
                         + qid 
-                        + '</span><div class="square letter" contenteditable="true" data-grid-index="' 
-                        + (i + '.' + j) + '"></div></td>');
+                        + '</span><div class="square letter" contenteditable="true"'
+                        + 'data-qid="' + qid + '" '
+                        + 'data-grid-index="' + (i + '.' + j) + '"></div></td>');
 
                 // Cells that belong to 2 questions 
                 // -> display question number at 2 top corners
@@ -70,8 +89,9 @@ class Crossword extends Component {
                         + first 
                         + '</span><span class="qnum-alt">' 
                         + second 
-                        + '</span><div class="square letter" contenteditable="true" data-grid-index="' 
-                        + (i + '.' + j) + '"></div></td>');
+                        + '</span><div class="square letter" contenteditable="true"'
+                        + 'data-qid="' + (first + '.' + second) + '" '
+                        + 'data-grid-index="' + (i + '.' + j) + '"></div></td>');
                 }
             })
 
@@ -97,11 +117,7 @@ class Crossword extends Component {
 
     // Remove text from all the cells
     onClear() {
-        $(".letter").each(function() {
-            $(this).removeClass("positive");
-            $(this).removeClass("negative");
-            $(this).text("");
-        });
+        $(".letter").removeClass("positive").removeClass("negative").text("");
     }
 
     // Fill in correct character at selected cell
@@ -142,27 +158,62 @@ class Crossword extends Component {
                 completed = false;
             }
         })
-        this.setState({ status: (completed) ? "completed" : "gameover" });
+        this.setState({ status: completed ? "completed" : "gameover" });
         this.handleShow();
+    }
+
+    onTabChange(_, data) {
+        $(".letter").removeClass("selected");
+        const qid = (data.activeIndex + 1);
+        $(".letter").each(function(idx, cell) {
+            const data = $(cell).data("qid");
+            const [row, col] = data.toString().split('.');
+            if (+row === qid || +col === qid) {
+                $(cell).addClass("selected");
+            }
+        });
+    }
+
+    onSolve() {
+        $(".letter").each(function(idx, cell) {
+            const loc = $(cell).data("grid-index");
+            $(cell).text(getCorrectLetter(loc, cwdata))
+        });
     }
 
     componentDidMount() {
         this.drawCrossword();
     }
 
-    componentWillUnmount() {
-        clearInterval(this.transitionTimer);
-    }
+    // componentWillUnmount() {
+    //     clearInterval(this.transitionTimer);
+    // }
 
     handleShow = () => this.setState({ active: true })
 
     handleHide = () => this.setState({ active: false })
 
     // Set interval before moving to the next part to prevent on mouse click events between both
-    handleAdvance = () => {
-        this.transitionTimer = setInterval(() => {
-            this.props.setNextPart(this.props.nextPart)
-        }, 100)
+    // handleAdvance = () => {
+    //     this.transitionTimer = setInterval(() => {
+    //         this.props.setNextPart(this.props.nextPart)
+    //     }, 100)
+    // }
+
+    handleHighlight = () => {
+        this.setState({ 
+            active: false,
+            msg: (<Menu.Item key='message'>まつりへ <Label>1</Label></Menu.Item>)
+        })
+        const [startRow, startCol] = messageStartLocation;
+        $(".letter").each(function(idx, cell) { 
+            $(cell).attr("contenteditable", false);
+            const data = $(cell).data("grid-index");
+            const [row, col] = data.toString().split('.');
+            if (+row >= startRow && +col >= startCol && ((+row - startRow) === (+col - startCol))) {
+                $(cell).addClass("rainbow");
+            }
+        });
     }
 
     handleRetry = () => {
@@ -173,20 +224,23 @@ class Crossword extends Component {
     renderHint(hintObj) {
         switch(hintObj.req) {
             case "none":
-                return <NormalHint {...hintObj} />;
-            case "mus":
-                return <MusicHint {...hintObj} />;
-            case "img":
+                return <TextHint {...hintObj} />;
+            case "sound":
+                return <SoundHint {...hintObj} />;
+            case "image":
                 return <PictureHint {...hintObj} />;
+            case "completed":
+                return <SoundHint {...hintObj} />;
             default:
                 return <div/>;
         }
     }
 
     render() {
-        let panes = cwdata.map(d => Object.create({ 
-            menuItem: '#' + d.qid, 
-            render: () => <Tab.Pane>{ this.renderHint(d) }</Tab.Pane> }));
+        let panes = cwdata.map(d => Object.create({     
+            menuItem: d.req === "completed" ? this.state.msg : '#' + d.qid,
+            render: () => (d.req !== "completed" || d.req === this.state.status)
+                    && <Tab.Pane>{ this.renderHint(d) }</Tab.Pane> }));
 
         return <Dimmer.Dimmable as={ Segment } dimmed={ this.state.active }>
             <div id="puzzle-container">
@@ -198,18 +252,18 @@ class Crossword extends Component {
                 <Popup 
                     trigger={ <Button secondary id="clue" 
                                     onClick={ this.onClue } 
-                                    disabled={ (this.state.clueCount === 0) ? true : false }>Clue</Button> }
-                    content={`Reveal the correct character at the selected row (left: ${this.state.clueCount} usage)`} />
+                                    disabled={ ((this.state.clueCount === 0) || this.isCompleted()) ? true : false }>Clue</Button> }
+                    content={`Reveal the correct character at the selected cell (left: ${this.state.clueCount} usage)`} />
                 <Popup
                     trigger={ <Button primary id="check" onClick={ this.onCheck } 
-                                    disabled={ (this.state.checkCount === 0) ? true : false }>Check</Button> }
-                    content={`Verify all filled cell (green-right, red-wrong)  (left: ${this.state.checkCount} usage)`} />
+                                    disabled={ ((this.state.checkCount === 0) || this.isCompleted()) ? true : false }>Check</Button> }
+                    content={`Verify all filled cell (green-right, red-wrong) (left: ${this.state.checkCount} usage)`} />
                 <Popup
-                    trigger={ <Button positive id="done" onClick={ this.onDone }>Done</Button> }
+                    trigger={ <Button positive id="done" onClick={ this.onDone } disabled={ this.isCompleted() }>Done</Button> }
                     content="Good to go (NOTE: any wrong/unfilled cell will lead to GAMEOVER)" />
                 <Popup
-                    trigger={ <Button negative id="clear-all" onClick={ this.onClear }>Clear All</Button> }
-                    content="Clear all cells....(was it that bad)" />
+                    trigger={ <Button negative id="clear-all" onClick={ this.onClear } disabled={ this.isCompleted() }>Clear All</Button> }
+                    content="Clear all cells" />
             </div>
 
             <div id="hints-container">
@@ -217,7 +271,10 @@ class Crossword extends Component {
                     <Icon name='compass outline' />
                     <Header.Content>Hints</Header.Content>
                 </Header>
-                <Tab panes={panes} />
+                <Tab menu={{ secondary: true, pointing: true }} panes={panes}
+                    defaultActiveIndex="15"
+                    onTabChange={ this.onTabChange }
+                />
                 <Divider hidden />
                 <Divider hidden />
             </div>
@@ -226,19 +283,20 @@ class Crossword extends Component {
                 <Header as='h2' icon inverted>
                     <Icon name={ (this.state.status === "completed") ? 'fast forward' : 'undo' } />
                     { (this.state.status === "completed") 
-                        ? "Congratulations on finishing the hardest crossword known to mankind!!!"
-                        : "Your answers are imcompleted/incorrect :( Let's try again?" }
+                        ? "Congratulations you owned it!"
+                        : "Your answers are incompleted/incorrect :( Let's try again?" }
                     <br />
                     <br />
                     <Button inverted color='olive' 
-                            onClick={ (this.state.status === "completed") ? this.handleAdvance : this.handleRetry }>
-                        { (this.state.status === "completed") ? 'Next' : 'Retry' }
+                            onClick={ (this.state.status === "completed") 
+                            ? this.handleHighlight 
+                            : this.handleRetry }>
+                        { (this.state.status === "completed") ? 'Yay' : 'Retry' }
                     </Button>
                 </Header>
             </Dimmer>
         </Dimmer.Dimmable>
     }
-
 }
 
 export default Crossword;

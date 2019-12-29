@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Container, Comment, Divider, Icon, Message, Segment } from 'semantic-ui-react';
+import { Container, Comment, Divider, Icon, Message, Segment, Image } from 'semantic-ui-react';
 
-import mainAvatar from '../images/myr-avatar.png';
-import bossAvatar from '../images/bos-avatar.png';
+import mainAvatar from '../images/cvs/mat-avatar.jpg';
+import oakAvatar from '../images/cvs/oak-avatar.jpg';
 
 class DisplayText extends Component {
     constructor(props) {
@@ -69,15 +69,29 @@ class DisplayText extends Component {
                 let scene = textObj.content[this.state.contentIdx];
                 let whom = Object.keys(scene)[0];
                 let said = scene[whom];
+                if (said.includes('#')) { // need to insert pokedex pic
+                    const parts = said.split('#');
+                    const pokedex = window.location.href + "images/pokedex/" + parts[1].slice(0, 4) + '.png';
+                    const pokedex2 = parts.length > 2 
+                        ? window.location.href + "images/pokedex/" + parts[2].slice(0, 4) + '.png'
+                        : null;
+                    said = <p>
+                        <span>{ parts[0] }</span>
+                        <Image size="small" src={ pokedex } />
+                        <span>{ parts[1].slice(4) }</span>
+                        { pokedex2 && <Image size="small" src={ pokedex2 } /> }
+                        { pokedex2 && <span>{ parts[2].slice(4) }</span> }
+                    </p>
+                }
                 return <Comment.Group size='massive'>
                     <Divider hidden />
                     <Comment>
-                        <Comment.Avatar as='a' src={ bossAvatar } />
+                        <Comment.Avatar as='a' src={ oakAvatar } />
                         <Comment.Content>
-                            <Comment.Author>ボス</Comment.Author>
+                            <Comment.Author>オーキド博士</Comment.Author>
                             <Comment.Text>
-                                <Segment color='red'>
-                                    { whom === "ボス" ? said : "..." }
+                                <Segment color='red' size="big">
+                                    { whom === "オーキド博士" ? said : "..." }
                                 </Segment>
                             </Comment.Text>
                         </Comment.Content>
@@ -89,7 +103,7 @@ class DisplayText extends Component {
                         <Comment.Content>
                             <Comment.Author>あなた</Comment.Author>
                             <Comment.Text>
-                                <Segment color='teal'>
+                                <Segment color='teal' size="big">
                                     { whom === "あなた" ? said : "..." }
                                 </Segment>
                             </Comment.Text>
